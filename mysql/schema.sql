@@ -46,7 +46,7 @@ INSERT INTO phases (name, objects) VALUES ('test_001', '{"1": "forest001", "2": 
 INSERT INTO phases (name, objects) VALUES ('test_002', '{"1": "forest002", "2": "mountain002", "3": "rain002", "4": "beach002"}');
 INSERT INTO phases (name, objects) VALUES ('test_003', '{"1": "forest003", "2": "mountain003", "3": "rain003", "4": "beach003"}');
 INSERT INTO phases (name, objects) VALUES ('test_004', '{"1": "forest004", "2": "mountain004", "3": "rain004", "4": "beach004"}');
-
+/* Select * from phases WHERE JSON_EXTRACT(objects, '$."1"') = "forest002"; */
 
 INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 1, (SELECT id FROM phases WHERE name = 'test_001'));
 INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 2, (SELECT id FROM phases WHERE name = 'test_002'));
