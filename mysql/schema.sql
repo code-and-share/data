@@ -12,7 +12,7 @@ CREATE TABLE `objects` (
 CREATE TABLE `phases` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(255),
-  `object_id` INT NOT NULL
+  `objects` JSON NOT NULL
 );
 
 CREATE TABLE `paths` (
@@ -23,7 +23,6 @@ CREATE TABLE `paths` (
 );
 
 
-ALTER TABLE `phases` ADD FOREIGN KEY (`object_id`) REFERENCES `objects` (`id`);
 ALTER TABLE `paths` ADD FOREIGN KEY (`phase_id`) REFERENCES `phases` (`id`);
 
 INSERT INTO objects (name, content) VALUES ('forest001', 'forest001.jpg');
@@ -43,23 +42,11 @@ INSERT INTO objects (name, content) VALUES ('beach002', 'beach002.jpg');
 INSERT INTO objects (name, content) VALUES ('beach003', 'beach003.jpg');
 INSERT INTO objects (name, content) VALUES ('beach004', 'beach004.jpg');
 
-/* TODO one line per phase, array of object ids instead */
-INSERT INTO phases (name, object_id) VALUES ('test_001', (SELECT id FROM objects WHERE name = 'forest001'));
-INSERT INTO phases (name, object_id) VALUES ('test_001', (SELECT id FROM objects WHERE name = 'mountain001'));
-INSERT INTO phases (name, object_id) VALUES ('test_001', (SELECT id FROM objects WHERE name = 'rain001'));
-INSERT INTO phases (name, object_id) VALUES ('test_001', (SELECT id FROM objects WHERE name = 'beach001'));
-INSERT INTO phases (name, object_id) VALUES ('test_002', (SELECT id FROM objects WHERE name = 'forest002'));
-INSERT INTO phases (name, object_id) VALUES ('test_002', (SELECT id FROM objects WHERE name = 'mountain002'));
-INSERT INTO phases (name, object_id) VALUES ('test_002', (SELECT id FROM objects WHERE name = 'rain002'));
-INSERT INTO phases (name, object_id) VALUES ('test_002', (SELECT id FROM objects WHERE name = 'beach002'));
-INSERT INTO phases (name, object_id) VALUES ('test_003', (SELECT id FROM objects WHERE name = 'forest003'));
-INSERT INTO phases (name, object_id) VALUES ('test_003', (SELECT id FROM objects WHERE name = 'mountain003'));
-INSERT INTO phases (name, object_id) VALUES ('test_003', (SELECT id FROM objects WHERE name = 'rain003'));
-INSERT INTO phases (name, object_id) VALUES ('test_003', (SELECT id FROM objects WHERE name = 'beach003'));
-INSERT INTO phases (name, object_id) VALUES ('test_004', (SELECT id FROM objects WHERE name = 'forest004'));
-INSERT INTO phases (name, object_id) VALUES ('test_004', (SELECT id FROM objects WHERE name = 'mountain004'));
-INSERT INTO phases (name, object_id) VALUES ('test_004', (SELECT id FROM objects WHERE name = 'rain004'));
-INSERT INTO phases (name, object_id) VALUES ('test_004', (SELECT id FROM objects WHERE name = 'beach004'));
+INSERT INTO phases (name, objects) VALUES ('test_001', '{"1": "forest001", "2": "mountain001", "3": "rain001", "4": "beach001"}');
+INSERT INTO phases (name, objects) VALUES ('test_002', '{"1": "forest002", "2": "mountain002", "3": "rain002", "4": "beach002"}');
+INSERT INTO phases (name, objects) VALUES ('test_003', '{"1": "forest003", "2": "mountain003", "3": "rain003", "4": "beach003"}');
+INSERT INTO phases (name, objects) VALUES ('test_004', '{"1": "forest004", "2": "mountain004", "3": "rain004", "4": "beach004"}');
+
 
 INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 1, (SELECT id FROM phases WHERE name = 'test_001'));
 INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 2, (SELECT id FROM phases WHERE name = 'test_002'));
