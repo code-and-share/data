@@ -8,3 +8,5 @@ mysql:
     MYSQL_DATABASE: database
     MYSQL_USER: user
     MYSQL_PASSWORD: password
+  volumes:
+    - ${PWD}/:/tmp/data
