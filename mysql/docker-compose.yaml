@@ -1,14 +1,9 @@
 mysql:
-    MYSQL_ROOT_PASSWORD: example
-mysql:
-  image: mysql:latest
+  image: mysql:8.0.18
   ports:
    - "3306:3306"
   environment:
     MYSQL_ROOT_PASSWORD: secret
-    MYSQL_USER: user
-    MYSQL_PASSWORD: usersecret
-    MYSQL_DATABASE: myimage_db
   volumes:
     - ./data:/docker-entrypoint-initdb.d
     - ./mysql_data:/var/lib/mysql
