@@ -42,15 +42,16 @@ INSERT INTO objects (name, content) VALUES ('beach002', 'beach002.jpg');
 INSERT INTO objects (name, content) VALUES ('beach003', 'beach003.jpg');
 INSERT INTO objects (name, content) VALUES ('beach004', 'beach004.jpg');
 
-INSERT INTO phases (name, objects) VALUES ('test_001', '{"1": "forest001", "2": "mountain001", "3": "rain001", "4": "beach001"}');
-INSERT INTO phases (name, objects) VALUES ('test_002', '{"1": "forest002", "2": "mountain002", "3": "rain002", "4": "beach002"}');
-INSERT INTO phases (name, objects) VALUES ('test_003', '{"1": "forest003", "2": "mountain003", "3": "rain003", "4": "beach003"}');
-INSERT INTO phases (name, objects) VALUES ('test_004', '{"1": "forest004", "2": "mountain004", "3": "rain004", "4": "beach004"}');
 INSERT INTO phases (name, objects) VALUES ('test_011', '[{"position": "1", "object":"forest001"}, {"position": "2", "object":"mountain001"}, {"position": "3", "object":"rain001"}, {"position": "4", "object":"beach001"}]');
+INSERT INTO phases (name, objects) VALUES ('test_012', '[{"position": "1", "object":"forest002"}, {"position": "2", "object":"mountain002"}, {"position": "3", "object":"rain002"}, {"position": "4", "object":"beach002"}]');
+INSERT INTO phases (name, objects) VALUES ('test_013', '[{"position": "1", "object":"forest003"}, {"position": "2", "object":"mountain003"}, {"position": "3", "object":"rain003"}, {"position": "4", "object":"beach003"}]');
+INSERT INTO phases (name, objects) VALUES ('test_014', '[{"position": "1", "object":"forest004"}, {"position": "2", "object":"mountain004"}, {"position": "3", "object":"rain004"}, {"position": "4", "object":"beach004"}]');
 /* Select * from phases WHERE JSON_EXTRACT(objects, '$."1"') = "forest002"; */
-/* select name, JSON_EXTRACT(objects, '$[*].object') from phases WHERE name = 'test_011';
+/* select name, JSON_EXTRACT(objects, '$[*].object') from phases WHERE name = 'test_011'; */
+/* SELECT pos, obj FROM phases, JSON_TABLE(phases.objects, '$[*]' COLUMNS(pos INT PATH '$.position', obj VARCHAR(255) PATH '$.object')) AS t1 WHERE phases.name = "test_014"; */
+/* SELECT t1.pos, objects.content FROM objects, phases, JSON_TABLE(phases.objects, '$[*]' COLUMNS(pos INT PATH '$.position', obj VARCHAR(255) PATH '$.object')) AS t1 WHERE phases.name = "test_014" AND objects.name = t1.obj; */
 
-INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 1, (SELECT id FROM phases WHERE name = 'test_001'));
-INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 2, (SELECT id FROM phases WHERE name = 'test_002'));
-INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 3, (SELECT id FROM phases WHERE name = 'test_003'));
-INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_001', 4, (SELECT id FROM phases WHERE name = 'test_004'));
+INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_002', 1, (SELECT id FROM phases WHERE name = 'test_011'));
+INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_002', 2, (SELECT id FROM phases WHERE name = 'test_012'));
+INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_002', 3, (SELECT id FROM phases WHERE name = 'test_013'));
+INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_002', 4, (SELECT id FROM phases WHERE name = 'test_014'));
