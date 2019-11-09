@@ -12,7 +12,14 @@ if [ -z $2 ]; then
   exit 2
 fi
 
+APP="cns_mysql"
+VERSION=$2
+DOCKERUSER=$1
+
 sudo rm -rf mysql_data
-ID=$(docker build -q -t cns_mysql:$2 .)
-docker tag $ID $1/cns_mysql:$2
-docker push $1/cns_mysql:$2
+ID=$(docker build -q -t $APP:$VERSION .)
+echo "- docker image built as $ID"
+docker tag $ID $DOCKERUSER/$APP:$VERSION
+echo "- docker image $ID tagged as $DOCKERUSER/$APP:$VERSION"
+docker push $DOCKERUSER/$APP:$VERSION
+echo "- docker image pushed to https://hub.docker.com/repository/docker/$DOCKERUSER/$APP , version $VERSION"
