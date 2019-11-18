@@ -25,22 +25,22 @@ CREATE TABLE `paths` (
 
 ALTER TABLE `paths` ADD FOREIGN KEY (`phase_id`) REFERENCES `phases` (`id`);
 
-INSERT INTO objects (name, content) VALUES ('forest001', 'forest001.jpg');
-INSERT INTO objects (name, content) VALUES ('forest002', 'forest002.jpg');
-INSERT INTO objects (name, content) VALUES ('forest003', 'forest003.jpg');
-INSERT INTO objects (name, content) VALUES ('forest004', 'forest004.jpg');
-INSERT INTO objects (name, content) VALUES ('mountain001', 'mountain001.jpg');
-INSERT INTO objects (name, content) VALUES ('mountain002', 'mountain002.jpg');
-INSERT INTO objects (name, content) VALUES ('mountain003', 'mountain003.jpg');
-INSERT INTO objects (name, content) VALUES ('mountain004', 'mountain004.jpg');
-INSERT INTO objects (name, content) VALUES ('rain001', 'rain001.jpg');
-INSERT INTO objects (name, content) VALUES ('rain002', 'rain002.jpg');
-INSERT INTO objects (name, content) VALUES ('rain003', 'rain003.jpg');
-INSERT INTO objects (name, content) VALUES ('rain004', 'rain004.jpg');
-INSERT INTO objects (name, content) VALUES ('beach001', 'beach001.jpg');
-INSERT INTO objects (name, content) VALUES ('beach002', 'beach002.jpg');
-INSERT INTO objects (name, content) VALUES ('beach003', 'beach003.jpg');
-INSERT INTO objects (name, content) VALUES ('beach004', 'beach004.jpg');
+INSERT INTO objects (name, content) VALUES ('forest001', 'forest001.png');
+INSERT INTO objects (name, content) VALUES ('forest002', 'forest002.png');
+INSERT INTO objects (name, content) VALUES ('forest003', 'forest003.png');
+INSERT INTO objects (name, content) VALUES ('forest004', 'forest004.png');
+INSERT INTO objects (name, content) VALUES ('mountain001', 'mountain001.png');
+INSERT INTO objects (name, content) VALUES ('mountain002', 'mountain002.png');
+INSERT INTO objects (name, content) VALUES ('mountain003', 'mountain003.png');
+INSERT INTO objects (name, content) VALUES ('mountain004', 'mountain004.png');
+INSERT INTO objects (name, content) VALUES ('rain001', 'rain001.png');
+INSERT INTO objects (name, content) VALUES ('rain002', 'rain002.png');
+INSERT INTO objects (name, content) VALUES ('rain003', 'rain003.png');
+INSERT INTO objects (name, content) VALUES ('rain004', 'rain004.png');
+INSERT INTO objects (name, content) VALUES ('beach001', 'beach001.png');
+INSERT INTO objects (name, content) VALUES ('beach002', 'beach002.png');
+INSERT INTO objects (name, content) VALUES ('beach003', 'beach003.png');
+INSERT INTO objects (name, content) VALUES ('beach004', 'beach004.png');
 
 INSERT INTO phases (name, objects) VALUES ('test_011', '[{"position": "1", "object":"forest001"}, {"position": "2", "object":"mountain001"}, {"position": "3", "object":"rain001"}, {"position": "4", "object":"beach001"}]');
 INSERT INTO phases (name, objects) VALUES ('test_012', '[{"position": "1", "object":"forest002"}, {"position": "2", "object":"mountain002"}, {"position": "3", "object":"rain002"}, {"position": "4", "object":"beach002"}]');
