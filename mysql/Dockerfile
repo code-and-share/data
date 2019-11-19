@@ -1,4 +1,4 @@
-FROM bitnami/mysql:5.7-debian-9
+FROM mysql:8.0.18
 
 ENV MYSQL_ROOT_PASSWORD secret
 
