@@ -12,7 +12,7 @@ if [ -z $2 ]; then
   exit 2
 fi
 
-APP="cns_mysql"
+APP="cns_datafeed_mysql"
 VERSION=$2
 DOCKERUSER=$1
 
