@@ -6,6 +6,7 @@ Docker container, default data and other tools for PostgreSQL
 
 Currently the chosen solution
 
+ATTENTION: THE CONTAINER STILL HAS A DEVELOPMENT PASSWORD HARDCODED!!! DO NOT USE IN  PRODUCTION!!!
 
 ## MySQL
 Docker container, default data and other tools for MySQL  
