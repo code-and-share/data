@@ -6,15 +6,6 @@ CREATE USER feed WITH ENCRYPTED PASSWORD 'feeduser123';
 CREATE ROLE feed_role;
 GRANT feed_role TO feed;
 ALTER DEFAULT PRIVILEGES IN SCHEMA feed_schema GRANT ALL ON TABLES TO feed_role;
-/*
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON TABLES TO feed ;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON SEQUENCES TO feed ;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON FUNCTIONS TO feed ;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON TYPES TO feed ;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON SCHEMAS TO feed ;
-*/
---USE Paths;
-
 
 CREATE TABLE objects (
   id SERIAL PRIMARY KEY,
@@ -37,10 +28,6 @@ CREATE TABLE paths (
   phase_id integer REFERENCES phases (id)
 );
 ALTER TABLE paths OWNER TO feed;
-
-
-
---ALTER TABLE paths ADD FOREIGN KEY (phase_id) REFERENCES phases (id);
 
 INSERT INTO objects (name, content) VALUES ('forest001', 'forest001.png');
 INSERT INTO objects (name, content) VALUES ('forest002', 'forest002.png');
