@@ -63,10 +63,16 @@ INSERT INTO phases (name, objects) VALUES ('test_011', '[{"position": "1", "obje
 INSERT INTO phases (name, objects) VALUES ('test_012', '[{"position": "1", "object":"forest002"}, {"position": "2", "object":"mountain002"}, {"position": "3", "object":"rain002"}, {"position": "4", "object":"beach002"}]');
 INSERT INTO phases (name, objects) VALUES ('test_013', '[{"position": "1", "object":"forest003"}, {"position": "2", "object":"mountain003"}, {"position": "3", "object":"rain003"}, {"position": "4", "object":"beach003"}]');
 INSERT INTO phases (name, objects) VALUES ('test_014', '[{"position": "1", "object":"forest004"}, {"position": "2", "object":"mountain004"}, {"position": "3", "object":"rain004"}, {"position": "4", "object":"beach004"}]');
-/* Select * from phases WHERE JSON_EXTRACT(objects, '$."1"') = "forest002"; */
-/* select name, JSON_EXTRACT(objects, '$[*].object') from phases WHERE name = 'test_011'; */
-/* SELECT pos, obj FROM phases, JSON_TABLE(phases.objects, '$[*]' COLUMNS(pos INT PATH '$.position', obj VARCHAR(255) PATH '$.object')) AS t1 WHERE phases.name = "test_014"; */
-/* SELECT t1.pos, objects.content FROM objects, phases, JSON_TABLE(phases.objects, '$[*]' COLUMNS(pos INT PATH '$.position', obj VARCHAR(255) PATH '$.object')) AS t1 WHERE phases.name = "test_014" AND objects.name = t1.obj; */
+/* 
+select j->>'position', j->>'object' FROM (select (json_array_elements(objects)) j from phases where name='test_011') obj;
+select j->>'position' pos, objects.content FROM (select (json_array_elements(objects)) j from phases where name='test_011') obj, objects WHERE objects.name = j->>'object';
+
+
+SELECT t1.pos, objects.content FROM objects, phases, JSON_TABLE(phases.objects, '$[*]' COLUMNS(pos INT PATH '$.position', obj VARCHAR(255) PATH '$.object')) AS t1 WHERE phases.id in (SELECT phase_id from paths WHERE name = '" + chosen_path + "' AND phase_order = " + strconv.Itoa(phase) + ") AND objects.name = t1.obj
+
+
+select j->>'position' pos, objects.content FROM (select (json_array_elements(objects)) j from phases WHERE phases.id in (SELECT phase_id from paths WHERE name = 'testpath_002' and phase_order = '4')) obj, objects WHERE objects.name = j->>'object';
+*/
 
 INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_002', 1, (SELECT id FROM phases WHERE name = 'test_011'));
 INSERT INTO paths (name, phase_order, phase_id) VALUES ('testpath_002', 2, (SELECT id FROM phases WHERE name = 'test_012'));
